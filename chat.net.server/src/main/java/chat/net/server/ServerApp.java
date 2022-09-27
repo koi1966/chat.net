@@ -16,7 +16,7 @@ public class ServerApp {
                     .channel(NioServerSocketChannel.class)
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         protected void initChannel(SocketChannel socketChannel) throws Exception {
-
+                        socketChannel.pipeline().addLast(new MainHandler());
                         }
                     });
             ChannelFuture future = b.bind(8189).sync();
