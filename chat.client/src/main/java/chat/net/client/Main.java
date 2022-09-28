@@ -8,14 +8,19 @@ import javafx.stage.Stage;
 
 public class Main  extends Application {
 
+    @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("\\client.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/main.fxml"));
+////        System.out.println("ttttttt");
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../../resources/main.fxml"));
+//        Parent root = loader.load();
+
         primaryStage.setTitle("Hello Chat Client");
         primaryStage.setScene(new Scene(root,400,400));
         primaryStage.show();
     }
 
     public static void main(String[] args) {
-
+      launch(args);
     }
 }
