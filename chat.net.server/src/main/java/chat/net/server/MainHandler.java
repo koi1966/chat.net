@@ -1,11 +1,8 @@
 package chat.net.server;
 
-import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.channel.SimpleChannelInboundHandler;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +12,7 @@ public class MainHandler extends SimpleChannelInboundHandler<String> {
     private String clientName;
 
     @Override
-    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause)  {
         System.out.println("Клиент " + clientName + "отвалился");
         channels.remove(ctx.channel());
         broadcastMessage("SERVER","Клиент" + clientName+ "отвалился");
@@ -23,7 +20,7 @@ public class MainHandler extends SimpleChannelInboundHandler<String> {
     }
 
     @Override
-    public void channelActive(ChannelHandlerContext ctx) throws Exception {
+    public void channelActive(ChannelHandlerContext ctx) {
         System.out.println("Клиент подключился" + ctx);
         channels.add(ctx.channel());
         clientName = "Клиент #" + newClientIndex;
@@ -31,11 +28,11 @@ public class MainHandler extends SimpleChannelInboundHandler<String> {
         broadcastMessage("SERVER","Подключился новый клиент" + clientName);
     }
 
-    protected void channelRead0(ChannelHandlerContext channelHandlerContext, String s) throws Exception {
+    protected void channelRead0(ChannelHandlerContext channelHandlerContext, String s) {
         System.out.println("Получено сообщение" + s);
         if (s.startsWith("/")) {
             if (s.startsWith("/changename")) { // change name1
-                String newNickname = s.split("\\s", 1)[1];
+                String newNickname = s.split("\\s", 2)[1];
                 broadcastMessage("SERVER","Kлиент-" + clientName + "сменил имя на -" + newNickname);
                 clientName = newNickname;
             }

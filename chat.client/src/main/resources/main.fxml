@@ -5,7 +5,9 @@
 
 <VBox fx:controller="chat.net.client.Controller" xmlns:fx="http://javafx.com/fxml">
     <MenuBar>
-        <Menu onAction="#exitAction">Exit</Menu>
+        <Menu text="Программа">
+            <MenuItem text="Выйти из программы" onAction="#exitAction"/>
+        </Menu>
     </MenuBar>
     <TextArea fx:id="mainArea" editable="false" VBox.vgrow="ALWAYS"/>
     <HBox>

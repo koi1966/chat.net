@@ -16,13 +16,13 @@ public class Controller implements Initializable {
     TextField msgField;
     @FXML
     TextArea mainArea;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         network = new Network((args -> {
-mainArea.appendText((String) args[0]);
+            mainArea.appendText((String) args[0]);
         }));
     }
-
 
     public void sendMsgAction(ActionEvent actionEvent) {
         network.sendMessage(msgField.getText());
@@ -30,7 +30,8 @@ mainArea.appendText((String) args[0]);
         msgField.requestFocus();
     }
 
-    public void exitAction(ActionEvent actionEvent) {
+    public void exitAction() {
+        network.close();
         Platform.exit();
     }
 }
